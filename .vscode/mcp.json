@@ -3,6 +3,24 @@
         "mcp-server-on-azure-local-server": {
             "type": "http",
             "url": "http://localhost:7071/mcp"
+        },
+        "functionapp-mcp-remote-server": {
+            "type": "http",
+            "url": "https://functionapp-mcp-chayhdeshtgkg0h9.canadacentral-01.azurewebsites.net/mcp",
+            "headers": {
+                "x-functions-key": "${input:functionapp-mcpMcpHostKey}"
+            }
         }
-    }
+    },
+    "inputs": [
+        {
+            "type": "command",
+            "id": "functionapp-mcpMcpHostKey",
+            "command": "azureFunctions.getMcpHostKey",
+            "args": {
+                "resourceId": "/subscriptions/59225357-d118-40db-b642-02ce0aa8b0f5/resourceGroups/functionapp-mcp_group/providers/Microsoft.Web/sites/functionapp-mcp",
+                "projectType": "SelfHostedMcpServer"
+            }
+        }
+    ]
 }
